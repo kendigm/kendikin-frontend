@@ -1,6 +1,7 @@
 import React from "react";
 
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const productList = [
     {
@@ -137,12 +138,13 @@ const Products = () => {
                 </h2>
                 <div className="grid grid-cols-12 text-center justify-start xl:justify-center mt-12">
                     {productList.map((product, i) => (
-                        <div
+                        <Link
+                            to={`/product/${i}`}
                             className="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 p-2"
                             key={i}
                         >
                             <ProductItem product={product} />{" "}
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

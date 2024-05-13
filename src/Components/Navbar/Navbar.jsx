@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from 'react';
 import Cart from '../Cart/Cart';
-import { useSelector } from 'react-redux';
-
+import { useSelector } from 'react-redux'
+import { useAuth0 } from "@auth0/auth0-react";
+;
 const Navbar = () => {
+  const { loginWithRedirect } = useAuth0();
   const [open, setOpen] = useState(false);
   const products = useSelector((state) => state.cart.products)
 
@@ -24,11 +26,11 @@ const Navbar = () => {
             <IoIosArrowDown />
           </div> */}
           <div className="item">
-            <Link className='link' to="/products/1">Women</Link>
+            <Link className='link' to="/products">Women</Link>
           </div>          <div className="item">
-            <Link className='link' to="/products/2">Men</Link>
+            <Link className='link' to="/products">Men</Link>
           </div>          <div className="item">
-            <Link className='link' to="/products/3">Kids</Link>
+            <Link className='link' to="/products">Kids</Link>
           </div>
         </div>
         <div className="center">
@@ -39,20 +41,21 @@ const Navbar = () => {
 
         <div className="right">
           <div className="item">
-            <Link className='link' to="/products/3">New</Link>
+            <Link className='link' to="/products">New</Link>
           </div><div className="item">
-            <Link className='link' to="/products/3">Apparel</Link>
+            <Link className='link' to="/products">Apparel</Link>
           </div><div className="item">
-            <Link className='link' to="/products/3">Bag</Link>
+            <Link className='link' to="/products">Bag</Link>
           </div>
           <div className="item">
-            <Link className='link' to="/products/3">Shoes</Link>
+            <Link className='link' to="/products">Shoes</Link>
           </div>
           <div className="item">
-            <Link className='link' to="/products/3">Beauty</Link>
+            <Link className='link' to="/products">Beauty</Link>
           </div>  <div className="item">
-            <Link className='link' to="/products/3">Accessories</Link>
+            <Link className='link' to="/products">Accessories</Link>
           </div>
+          <button onClick={() => loginWithRedirect()}>Log In</button>
           <div className="icons">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="svgicons">
               <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
