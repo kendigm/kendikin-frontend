@@ -1,5 +1,9 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
+import { useProductQuery } from "../../redux/usersApiSlices";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
 
 
 const productDetails = {
@@ -51,37 +55,41 @@ const productDetails = {
     ],
 };
 
-const ProductPreviews = ({ previews }) => {
+const ProductPreviews = ({ data }) => {
     const [index, setIndex] = useState(0);
+    // const { id } = useParams()
+    // const { data } = useProductQuery(id)
+    // console.log(data)
 
     return (
         <div className="bg-gray-100 dark:bg-slate-800 rounded-xl p-4 sm:p-6 lg:p-12 lg:mr-6">
-            <div className="text-center py-6 cursor-pointer">
-                <img
-                    src={previews[index].previewUrl}
-                    alt=""
-                    className="max-w-full h-auto rounded-lg mx-auto"
-                />
-            </div>
+            {data &&
+                <div className="text-center py-6 cursor-pointer">
+                    <img
+                        src={data?.img?.secure_url}
+                        alt=""
+                        className="max-w-full h-auto rounded-lg mx-auto"
+                    />
+                </div>
+            }
 
             <ul className="flex gap-3 mt-6">
-                {previews.map((preview, i) => (
-                    <li
-                        className="w-24 h-24 flex justify-center items-center p-2 rounded-md border border-gray-200 dark:border-slate-700 cursor-pointer"
-                        key={i}
-                        onClick={() => setIndex(i)}
-                    >
-                        <img src={preview.thumbUrl} alt="" className="max-w-full h-auto" />
-                    </li>
-                ))}
+                <li
+                    className="w-24 h-24 flex justify-center items-center p-2 rounded-md border border-gray-200 dark:border-slate-700 cursor-pointer"
+                    onClick={() => setIndex(data.id)}
+                >
+                    <img
+                        src={data?.img?.secure_url}
+                        alt="" className="max-w-full h-auto" />
+                </li>
             </ul>
         </div>
     );
 };
 
-ProductPreviews.propTypes = {
-    previews: PropTypes.array.isRequired,
-};
+// ProductPreviews.propTypes = {
+//     previews: PropTypes.array.isRequired,
+// };
 
 const ColorVariant = () => {
     const [selectedColor, setSelectedColor] = useState("Multi");
@@ -138,15 +146,19 @@ const SizeVariant = () => {
         setSelectedSize(value);
     };
 
+    const { id } = useParams()
+    const { data } = useProductQuery(id)
+    console.log(data)
     return (
         <>
             <div className="mb-6">
                 <h5 className="font-medium mb-2">
                     Size:{" "}
                     <span className="opacity-50">
-                        {selectedSize &&
+                        {data?.size}
+                        {/* {selectedSize &&
                             productDetails.sizeVariants.find((size) => size.value === selectedSize)
-                                ?.title}
+                                ?.title} */}
                     </span>
                 </h5>
                 <div className="flex flex-wrap gap-2 mb-2">
@@ -220,11 +232,11 @@ const QtyField = ({ name, value, onChange }) => {
     );
 };
 
-QtyField.propTypes = {
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.any,
-};
+// QtyField.propTypes = {
+//     name: PropTypes.string.isRequired,
+//     onChange: PropTypes.func.isRequired,
+//     value: PropTypes.any,
+// };
 
 const Product = () => {
     const [show, setShow] = useState(true);
@@ -245,7 +257,13 @@ const Product = () => {
             [name]: type === "checkbox" ? checked : value,
         });
     };
+    const { id } = useParams()
+    const { data } = useProductQuery(id)
+    const dispatch = useDispatch();
 
+    const handleAddToCart = () => {
+        dispatch(addToCart(data));
+    };
     return (
         <Fragment>
             {/* <section className="py-11 bg-white dark:bg-[#0b1727] text-white relative overflow-hidden z-10">
@@ -265,18 +283,18 @@ const Product = () => {
                     // onClick={handleClose}
                     >
                         {/* <FontAwesomeIcon icon={faTimes} className="text-xl" /> */}
-                        times
+                        {/* times */}
                     </button>
 
                     <div className="flex flex-col lg:flex-row justify-center gap-6">
                         <div className="w-full lg:w-1/2">
-                            <ProductPreviews previews={productDetails.previews} />
+                            <ProductPreviews data={data} />
                         </div>
                         <div className="w-full lg:w-1/2">
                             <div className="px-6 py-12">
                                 <div className="mb-6 lg:mb-12">
                                     <h1 className="text-4xl leading-none font-medium mb-4">
-                                        {productDetails.title}
+                                        {data?.title}
                                     </h1>
                                     <p className="opacity-70 mb-6">
                                         <span>4.0</span>{" "}
@@ -289,17 +307,16 @@ const Product = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                         </svg>
 
-                                        <a
-                                            href="#!"
+                                        <span
                                             className="text-blue-600 hover:underline font-medium ml-1"
                                         >
                                             8 Reviews
-                                        </a>{" "}
+                                        </span>{" "}
                                         <span className="ml-2">104 Order</span>
                                     </p>
                                     <h3 className="text-blue-600 text-2xl font-bold">
                                         Rs.
-                                        {productDetails.price}
+                                        {data?.price}
                                     </h3>
                                 </div>
 
@@ -320,12 +337,16 @@ const Product = () => {
                                     </div>
                                     <div className="flex flex-col gap-3 w-full my-7">
                                         <div className="flex items-center gap-4 w-full max-w-lg">
-                                            <button className="bg-black border border-blue-600 text-white text-sm rounded uppercase hover:bg-opacity-90 px-10 py-2.5 h-10 md:px-12 w-1/2">
+                                            <button
+                                                onClick={handleAddToCart}
+                                                className="bg-black border border-blue-600 text-white text-sm rounded uppercase hover:bg-opacity-90 px-10 py-2.5 h-10 md:px-12 w-1/2">
+
+
                                                 Add To Cart
                                             </button>
-                                            <button className="border border-blue-600 text-blue-600 hover:bg-black hover:text-white text-sm rounded uppercase px-6 py-2.5 h-10 md:px-12 w-1/2">
+                                            {/* <button className="border border-blue-600 text-blue-600 hover:bg-black hover:text-white text-sm rounded uppercase px-6 py-2.5 h-10 md:px-12 w-1/2">
                                                 View Details
-                                            </button>
+                                            </button> */}
                                         </div>
                                         <div className="flex items-center gap-4 w-full">
                                             <button className="hover:bg-black rounded hover:bg-opacity-10 text-blue-600 px-3 py-2">
@@ -338,10 +359,7 @@ const Product = () => {
                                                 Add To Wishlist
                                             </button>
                                             <button className="hover:bg-black rounded hover:bg-opacity-10 text-blue-600 px-3 py-2">
-                                                {/* <FontAwesomeIcon
-                                                    icon={faShareAlt}
-                                                    className="mr-1 text-sm"
-                                                />{" "} */}
+
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                                 </svg>

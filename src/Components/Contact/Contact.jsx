@@ -1,14 +1,35 @@
+import { useRef } from 'react';
 import './Contact.scss'
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs
+            .sendForm('service_imb10by', 'template_fmzdg47', form.current, {
+                publicKey: '8DHC0U9fMIPOUVUOe',
+            })
+            .then(
+                () => {
+                    console.log('SUCCESS!');
+                },
+                (error) => {
+                    console.log('FAILED...', error.text);
+                },
+            );
+    };
+
     return (
         <div className='Contact'>
             <div className="wrapper">
                 <span>BE IN TOUCH WITH US:</span>
-                <div className="mail">
-                    <input type="email" placeholder='Enter Your Email' name="" id="" />
-                    <button>JOIN US</button>
-                </div>
+                <form onSubmit={sendEmail} ref={form} className="mail">
+                    <input type="email" placeholder='Enter Your Email' name="user_email" />
+                    <input type='submit' className='shadow-lg rounded-none bg-blue-300 border-blue-800' value="JOIN US" />
+                </form>
                 <div className="icons">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="svgicons">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />

@@ -10,6 +10,7 @@ import Navbar from "./Components/Navbar/Navbar"
 import Footer from "./Components/Footer/Footer"
 import Product from "./pages/product/Product";
 import Products from "./Components/products/Products";
+import PaymentConfirm from "./pages/payments/PaymentConfirm";
 const Layout = () => {
   return <div className="app">
     <Navbar />
@@ -37,6 +38,9 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <Product />,
+      }, {
+        path: "checkout-success",
+        element: <PaymentConfirm />,
       },
     ]
   },
