@@ -117,13 +117,15 @@ const Cart = () => {
     return total.toFixed(2)
   }
   const { loginWithRedirect, user } = useAuth0();
+  console.log("🚀 ~ Cart ~ user:", user)
 
   const handleCheckout = () => {
     if (!user) {
       loginWithRedirect()
     }
-    axios.post(`http://localhost:5000/api/create-checkout-session`, {
+    axios.post(`http://localhost:4000/api/create-checkout-session`, {
       cartItems,
+      email: user.email
     })
       .then((response) => {
         if (response.data) {
