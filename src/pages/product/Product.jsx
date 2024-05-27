@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useProductQuery } from "../../redux/usersApiSlices";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
+import { addToWishlist } from "../../redux/wishlistSlice";
 
 
 const productDetails = {
@@ -264,6 +264,12 @@ const Product = () => {
     const handleAddToCart = () => {
         dispatch(addToCart(data));
     };
+    const handleAddtowishlist = () => {
+        dispatch(addToWishlist(data));
+    };
+    const wishlistItems = useSelector((state) => state?.wishlist?.wishlistProducts);
+    const isProductInWishlist = wishlistItems && data && wishlistItems?.some((item) => item?.id === data?.id);
+
     return (
         <Fragment>
             {/* <section className="py-11 bg-white dark:bg-[#0b1727] text-white relative overflow-hidden z-10">
@@ -315,12 +321,11 @@ const Product = () => {
                                         <span className="ml-2">104 Order</span>
                                     </p>
                                     <h3 className="text-blue-600 text-2xl font-bold">
-                                        Rs.
-                                        {data?.price}
+                                        ${data?.price}
                                     </h3>
                                 </div>
 
-                                <form action="#!">
+                                <form action="#">
                                     <div className="mb-6">
                                         <ColorVariant />
                                     </div>
@@ -340,18 +345,20 @@ const Product = () => {
                                             <button
                                                 onClick={handleAddToCart}
                                                 className="bg-black border border-blue-600 text-white text-sm rounded uppercase hover:bg-opacity-90 px-10 py-2.5 h-10 md:px-12 w-1/2">
-
-
                                                 Add To Cart
                                             </button>
-                                            {/* <button className="border border-blue-600 text-blue-600 hover:bg-black hover:text-white text-sm rounded uppercase px-6 py-2.5 h-10 md:px-12 w-1/2">
-                                                View Details
-                                            </button> */}
+
                                         </div>
                                         <div className="flex items-center gap-4 w-full">
-                                            <button className="hover:bg-black rounded hover:bg-opacity-10 text-blue-600 px-3 py-2">
-                                                {/* <FontAwesomeIcon icon={faHeart} /> */}
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                            <button
+                                                onClick={handleAddtowishlist}
+
+                                                className="hover:bg-red-400 rounded hover:bg-opacity-10 text-red-600 px-3 py-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    // fill="none"
+                                                    fill={isProductInWishlist ? "currentColor" : "none"}
+
+                                                    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                                                 </svg>
 

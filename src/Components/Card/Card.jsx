@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const Card = ({ item }) => {
 
     return (
-        <Link className="link" to={`/product/${item.id}`} >
+        <Link className="link " to={`/product/${item.id}`} >
             {item &&
                 (
                     <div className="card">
@@ -12,10 +12,10 @@ const Card = ({ item }) => {
                             <img src={item?.img?.secure_url} alt="" className="mainImg" />
                             <img src={item?.img?.secure_url} alt="" className="secondImg" />
                         </div>
-                        <h2>{item?.title}</h2>
+                        <h3 className='font-bold text-xl capitalize'>{item?.title}</h3>
                         <div className="prices">
-                            <h2>${item?.price}</h2>
-                            {/* <h3>${item?.price}</h3> */}
+                            <span className='text-red-600 font-bold text-lg'>${item?.price}</span>
+                            <h3 className='capitalize'>{item?.category}</h3>
                         </div>
                     </div>
                 )}

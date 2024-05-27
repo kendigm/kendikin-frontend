@@ -59,12 +59,20 @@ const FeatureProducts = ({ type }) => {
     };
 
     const { data } = useProductsQuery()
+
     const filteredProducts = data?.filter((product) => {
         const matchesCategory = category === 'all' || product.category === category;
         const matchesSearchTerm = product.title.toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCategory && matchesSearchTerm;
-    });
-    console.log(data)
+    }) || [];
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
+    const shuffledProducts = shuffleArray([...filteredProducts]);
     return (
         <div className='FeatureProducts'>
             <div className="top">
@@ -80,7 +88,7 @@ const FeatureProducts = ({ type }) => {
                         All
                     </button>
                     <button
-                        onClick={() => handleCategoryChange('kid')}
+                        onClick={() => handleCategoryChange('kids')}
                         className={`py-2 px-4 rounded ${category === 'kid' ? 'bg-black text-white' : 'bg-gray-200'}`}
                     >
                         Kids
@@ -109,8 +117,8 @@ const FeatureProducts = ({ type }) => {
                 </div>
             </div>
             <div className="bottom">
-                {data &&
-                    filteredProducts?.map((item) => <Card item={item} key={item.id} />)}
+                {shuffledProducts &&
+                    shuffledProducts.slice(0, 5)?.map((item) => <Card item={item} key={item.id} />)}
             </div>
         </div>
     )

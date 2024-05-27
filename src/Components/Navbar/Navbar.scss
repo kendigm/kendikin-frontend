@@ -3,6 +3,10 @@
   width: 23px;
 }
 .navbar {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 999;
   height: 80px;
   .wrapper {
     padding: 13px 26px;

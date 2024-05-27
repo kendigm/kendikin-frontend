@@ -27,8 +27,8 @@ const Contact = () => {
             <div className="wrapper">
                 <span>BE IN TOUCH WITH US:</span>
                 <form onSubmit={sendEmail} ref={form} className="mail">
-                    <input type="email" placeholder='Enter Your Email' name="user_email" />
-                    <input type='submit' className='shadow-lg rounded-none bg-blue-300 border-blue-800' value="JOIN US" />
+                    <input type="email" placeholder='Enter Your Email' className='text-black' name="user_email" />
+                    <input type='submit' className='shadow-lg  rounded-none bg-blue-300 border-blue-800' value="JOIN US" />
                 </form>
                 <div className="icons">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="svgicons">
