@@ -4,8 +4,6 @@ import {
   Outlet,
 } from "react-router-dom";
 import Home from "./pages/home/Home"
-// import Product from "./pages/product/Product"
-// import Products from "./pages/products/Products"
 import Navbar from "./Components/Navbar/Navbar"
 import Footer from "./Components/Footer/Footer"
 import Product from "./pages/product/Product";

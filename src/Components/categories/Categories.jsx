@@ -6,17 +6,17 @@ function Categories() {
             <div className="col">
                 <div className="row">
                     <img src="/products/product2.jpg" alt="" />
-                    <button><Link className="link" to="products/1">Women</Link></button>
+                    <button><Link className="link" to="#">Women</Link></button>
                 </div>
                 <div className="row">
                     <img src="/products/product1.jpg" alt="" />
-                    <button><Link className="link" to="products/1">Sale</Link></button>
+                    <button><Link className="link" to="#">Sale</Link></button>
                 </div>
             </div>
             <div className="col">
                 <div className="row">
                     <img src="/products/product3.jpg" alt="" />
-                    <button><Link className="link" to="products/1">MEN</Link></button>
+                    <button><Link className="link" to="#">MEN</Link></button>
                 </div>
             </div>
             <div className="col col-l">
@@ -24,20 +24,20 @@ function Categories() {
                     <div className="col">
                         <div className="row">
                             <img src="/products/product4.jpg" alt="" />
-                            <button><Link className="link" to="products/1">Accessories</Link></button>
+                            <button><Link className="link" to="#">Accessories</Link></button>
                         </div>
                     </div>
                     <div className="col">
                         <div className="row">
                             <img src="/products/product5.jpg" alt="" />
-                            <button><Link className="link" to="products/1">Shoes</Link></button>
+                            <button><Link className="link" to="#">Shoes</Link></button>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="row">
                         <img src="/products/category.jpg" alt="" />
-                        <button><Link className="link" to="products/1">New Season</Link></button>
+                        <button><Link className="link" to="#">New Season</Link></button>
                     </div>
                 </div>
             </div>

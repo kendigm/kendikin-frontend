@@ -3,90 +3,14 @@ import { useProductsQuery } from "../../redux/usersApiSlices";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { addToWishlist } from "../../redux/wishlistSlice";
-// import { addToWishlist } from "../../redux/wishlistSlice";
-
-const productList = [
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_1.jpg",
-        title: "Luxury Tassel Small Messenger Bag For Lingge",
-        price: "225.00",
-        rating: "4.1",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_2.jpg",
-        title: "R WHITES LEMONADE 24X330ML CANS",
-        price: "12.00",
-        rating: "4.9",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_3.jpg",
-        title: "Spring Autumn Kids Thin Sweater Boys Girls Clothes Cute Dinosaur",
-        price: "835.00",
-        rating: "4.6",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_4.jpg",
-        title: "LAOCHRA White Shoes For Men Sneakers Leather Korean Style",
-        price: "942.00",
-        rating: "4.2",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_5.jpg",
-        title: "Hammered Copper Martini Glasses Refill 84pcs",
-        price: "1721.00",
-        rating: "4.0",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_6.jpg",
-        title: "Gel Pen Refill Gel Pen Glitter Pens Gel Roller",
-        price: "234.00",
-        rating: "3.7",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_7.jpg",
-        title: "Science in Sport Clear Drinks Bottle, 800",
-        price: "56.00",
-        rating: "4.9",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_8.jpg",
-        title: "Spring Autumn Kids Thin Sweater Boys Girls Clothes Cute",
-        price: "6534.00",
-        rating: "4.5",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_9.jpg",
-        title: "Spring Autumn Kids Thin Sweater Boys Girls Clothes Waterproof",
-        price: "1725.00",
-        rating: "4.8",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_10.jpg",
-        title: "Brightening Fine Lines and Wrinkles Face Cleanser",
-        price: "2342.00",
-        rating: "4.6",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_11.jpg",
-        title: "Revlon Ultra HD Lipstick ( Pack Of 2 ) Shades 860",
-        price: "172.00",
-        rating: "4.1",
-    },
-    {
-        img: "https://cdn.easyfrontend.com/pictures/ecommerce/ep-grid_7_12.jpg",
-        title: "Men's Perfumes Sauvage Eau De Parfum Perfumes",
-        price: "435.00",
-        rating: "4.8",
-    },
-];
 
 const ProductItem = ({ product }) => {
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.products);
-    
-    const isProductInCart = cartItems?.some((item) => item.id === product.id);
+
+    const isProductInCart = cartItems && cartItems?.some((item) => item?.id === product?.id);
     const wishlistItems = useSelector((state) => state?.wishlist?.wishlistProducts);
-    const isProductInWishlist = wishlistItems?.some((item) => item.id === product.id);
+    const isProductInWishlist = wishlistItems?.some((item) => item?.id === product?.id);
 
     return (
         <div

@@ -5,48 +5,7 @@ import './FeatureProducts.scss'
 
 
 const FeatureProducts = ({ type }) => {
-    // const data = [
-    //     {
-    //         id: 1,
-    //         // img: product1,
-    //         img: "/products/product1.jpg",
-    //         img1: "./products/product2.jpg",
-    //         title: "Long Sleeve T Shirt",
-    //         isNew: true,
-    //         oldPrice: 19,
-    //         price: 12
 
-    //     }, {
-    //         id: 2,
-    //         img: "/products/product4.jpg",
-    //         img1: "/products/product3.jpg",
-    //         title: "Long Sleeve T Shirt",
-    //         isNew: false,
-    //         oldPrice: 19,
-    //         price: 12
-
-    //     },
-    //     {
-    //         id: 3,
-    //         img: "/products/product5.jpg",
-    //         img1: "/products/product6.jpg",
-    //         title: "Long Sleeve T Shirt",
-    //         isNew: true,
-    //         oldPrice: 19,
-    //         price: 12
-
-    //     },
-    //     {
-    //         id: 4,
-    //         img: "/products/product7.jpg",
-    //         img1: "/products/product8.jpg",
-    //         title: "Long Sleeve T Shirt",
-    //         isNew: false,
-    //         oldPrice: 59,
-    //         price: 42
-
-    //     }
-    // ]
     const [searchTerm, setSearchTerm] = useState('');
     const [category, setCategory] = useState('all');
 
@@ -89,7 +48,7 @@ const FeatureProducts = ({ type }) => {
                     </button>
                     <button
                         onClick={() => handleCategoryChange('kids')}
-                        className={`py-2 px-4 rounded ${category === 'kid' ? 'bg-black text-white' : 'bg-gray-200'}`}
+                        className={`py-2 px-4 rounded ${category === 'kids' ? 'bg-black text-white' : 'bg-gray-200'}`}
                     >
                         Kids
                     </button>
